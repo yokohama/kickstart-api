@@ -19,5 +19,5 @@
 | aws_secret_access_key | api / github / actions / secretes |  | 取得済み |
 | aws_region | api / github / actions / secretes |  | 取得済み |
 
-上記の内容を以下名前で、githubのactionsのSecretsに設定します。上記の内容の取得がまだの方は、こちらを参照して先に取得をして下さい。
+上記の内容を以下名前で、githubのactionsのSecretsに設定します。上記の内容の取得がまだの方は、[こちら](https://github.com/yokohama/kickstart/blob/main/README.md#kickstart-1)を参照して先に取得をして下さい。
 
