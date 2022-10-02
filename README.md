@@ -99,6 +99,8 @@ Keep-Alive: timeout=5
 - openapiファイルをデプロイするためには、先にインフラを構築する必要が有ります。
 - 先に、[こちら](https://github.com/yokohama/kickstart-cdk)でインフラを構築を完了させて、指示に従いここに戻ってきて下さい。
 
+<a id="kickstart-api-5-2 />
+
 ### 2. デプロイ
 
 
