@@ -11,3 +11,13 @@
 ### 2. forkした先のリポジトリに、`development`ブランチを作成して下さい。
 
 ## 2. developmentのデプロイの環境を用意する
+### 1. githubにsecretsを設定する。
+
+| 参照名 | 使用箇所 | 取得方法 | ステータス |
+| :--- | :--- | :--- | :--- |
+| aws_access_key_id | api / github / actions / secretes |  | 取得済み |
+| aws_secret_access_key | api / github / actions / secretes |  | 取得済み |
+| aws_region | api / github / actions / secretes |  | 取得済み |
+
+上記の内容を以下名前で、githubのactionsのSecretsに設定します。上記の内容の取得がまだの方は、こちらを参照して先に取得をして下さい。
+
