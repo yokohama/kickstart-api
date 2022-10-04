@@ -134,7 +134,7 @@ $ TARGET_ENV=local ./ops/deploy.sh
 ### 5. API Gateway(aws上のlocal）の疎通確認
 - トークンがないと、401エラー
 ```
-$ curl --include -H GET https://fh3ao3lhll.execute-api.ap-northeast-1.amazonaws.com/prod/users
+$ curl --include -H GET https://＜Api-local＞/users
 
 HTTP/2 401 
 content-type: application/json; charset=utf-8
@@ -163,7 +163,7 @@ x-amz-cf-id: pScoRMJT54tC-wWUMouxzdvH3is3Y8TLBpcltZNEKO2DxTAVClK-MA==
 
 - トークンを入れると成功
 ```
-$ curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://9cmzrav93l.execute-api.ap-northeast-1.amazonaws.com/prod/users
+$ curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://＜API-local＞/users
 
 HTTP/2 200 
 content-type: application/json; charset=utf-8
@@ -191,14 +191,21 @@ x-amz-cf-id: f36rnKlGojnjtdCHMCIpkmPbXX9tpZv-gemiPk-2NMBSf3R8EjPRCA==
 []
 ```
 
+### 3. API Gateway(aws上のdevと、prod）の初期化
+```
+$ TARGET_ENV=dev ./ops/deploy.sh
+$ TARGET_ENV=prod ./ops/deploy.sh
+```
 
+### 4. API Gateway(aws上のdevと、prod）の疎通確認
+```
+$ curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://＜API-dev＞/users
+$ curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://＜API-prod＞/users
+```
 
+## 6. API変更のデプロイ
 
-
-
-
-
-### 3. root.yamlを変更
+### 1. root.yamlを変更
 - openapi/root.yamlに、`/pets'のpathを追加します。
 
 ```
@@ -277,9 +284,53 @@ index 0585f10..db06a02 100644
      Access-Control-Allow-Origin:
 ```
 
+### 2. devにデプロイ
+```
+$ git add openapi/root.yaml
+$ git commit -m 'petsを追加'
+$ git push origin develop
+```
+- GitHub Actionsから進行の確認
 
-## 6. 変更のデプロイ
+<img src="https://user-images.githubusercontent.com/1023421/193783500-8b02dec0-1add-4cd1-8288-fc720b002a0a.png" width="400" />
 
 curl --include -H GET -H 'Authorization: Bearer' http://localhost:4010/pets 
 
+### 3. devの疎通確認
+- 403エラーが返ってきてるが、サーバーサイドにpetsを実装していないので、　疎通はOKです。
+```
+curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://＜API-dev＞/pets
 
+HTTP/2 403 
+content-type: application/json
+content-length: 2416
+date: Tue, 04 Oct 2022 09:21:32 GMT
+x-amzn-requestid: 6568629c-49d7-4638-a8eb-7541e40596c5
+x-amzn-errortype: IncompleteSignatureException
+x-amz-apigw-id: ZeQsgHk0NjMFZWg=
+x-cache: Error from cloudfront
+via: 1.1 4d1d94485bad1bf3835c40164ae90b1e.cloudfront.net (CloudFront)
+x-amz-cf-pop: NRT20-C3
+x-amz-cf-id: 2ERpXkrW59PDofPYRr5zRYMHStYdleCfVxD5Xqty1e9BQAwgzDpoKw==
+```
+
+### 4. prodにデプロイ
+- kickstart-apiのGitHubをブラウザで開き、[こちら](https://github.com/yokohama/kickstart-cdk#kickstart-ckd-10-8)を参考にして下さい。
+
+### 5. devの疎通確認
+- 403エラーが返ってきてるが、サーバーサイドにpetsを実装していないので、　疎通はOKです。
+```
+curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://＜API-prod＞/pets
+
+HTTP/2 403 
+content-type: application/json
+content-length: 2416
+date: Tue, 04 Oct 2022 09:21:32 GMT
+x-amzn-requestid: 6568629c-49d7-4638-a8eb-7541e40596c5
+x-amzn-errortype: IncompleteSignatureException
+x-amz-apigw-id: ZeQsgHk0NjMFZWg=
+x-cache: Error from cloudfront
+via: 1.1 4d1d94485bad1bf3835c40164ae90b1e.cloudfront.net (CloudFront)
+x-amz-cf-pop: NRT20-C3
+x-amz-cf-id: 2ERpXkrW59PDofPYRr5zRYMHStYdleCfVxD5Xqty1e9BQAwgzDpoKw==
+```
