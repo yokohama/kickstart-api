@@ -297,40 +297,64 @@ $ git push origin develop
 curl --include -H GET -H 'Authorization: Bearer' http://localhost:4010/pets 
 
 ### 3. devの疎通確認
-- 403エラーが返ってきてるが、サーバーサイドにpetsを実装していないので、　疎通はOKです。
 ```
 curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://＜API-dev＞/pets
 
-HTTP/2 403 
-content-type: application/json
-content-length: 2416
-date: Tue, 04 Oct 2022 09:21:32 GMT
-x-amzn-requestid: 6568629c-49d7-4638-a8eb-7541e40596c5
-x-amzn-errortype: IncompleteSignatureException
-x-amz-apigw-id: ZeQsgHk0NjMFZWg=
-x-cache: Error from cloudfront
-via: 1.1 4d1d94485bad1bf3835c40164ae90b1e.cloudfront.net (CloudFront)
-x-amz-cf-pop: NRT20-C3
-x-amz-cf-id: 2ERpXkrW59PDofPYRr5zRYMHStYdleCfVxD5Xqty1e9BQAwgzDpoKw==
+HTTP/2 200 
+content-type: application/json; charset=utf-8
+content-length: 2
+date: Tue, 04 Oct 2022 09:54:57 GMT
+x-amzn-requestid: 591e33c0-1e23-4f25-96a5-408d9a7e219d
+referrer-policy: strict-origin-when-cross-origin
+x-permitted-cross-domain-policies: none
+x-xss-protection: 0
+x-runtime: 0.329173
+x-frame-options: SAMEORIGIN
+x-download-options: noopen
+x-request-id: eb50d4b1-623f-4fa5-a234-e4f26885e1b1
+x-amz-apigw-id: ZeVlxFdmNjMFcDg=
+vary: Accept, Origin
+cache-control: max-age=0, private, must-revalidate
+server-timing: start_processing.action_controller;dur=0.08, sql.active_record;dur=1.41, process_action.action_controller;dur=324.22
+x-content-type-options: nosniff
+etag: W/"4f53cda18c2baa0c0354bb5f9a3ecbe5"
+x-cache: Miss from cloudfront
+via: 1.1 eddf9e6940bd96929e1096ef63815d52.cloudfront.net (CloudFront)
+x-amz-cf-pop: NRT57-P3
+x-amz-cf-id: A9IR669XrsFFgmen2O-uPvF0A_je-Wm1xGrSIq7jox9L8uOtjASTag==
+
+[]
 ```
 
 ### 4. prodにデプロイ
 - kickstart-apiのGitHubをブラウザで開き、[こちら](https://github.com/yokohama/kickstart-cdk#kickstart-ckd-10-8)を参考にして下さい。
 
 ### 5. prodの疎通確認
-- 403エラーが返ってきてるが、サーバーサイドにpetsを実装していないので、　疎通はOKです。
 ```
 curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://＜API-prod＞/pets
 
-HTTP/2 403 
-content-type: application/json
-content-length: 2416
-date: Tue, 04 Oct 2022 09:21:32 GMT
-x-amzn-requestid: 6568629c-49d7-4638-a8eb-7541e40596c5
-x-amzn-errortype: IncompleteSignatureException
-x-amz-apigw-id: ZeQsgHk0NjMFZWg=
-x-cache: Error from cloudfront
-via: 1.1 4d1d94485bad1bf3835c40164ae90b1e.cloudfront.net (CloudFront)
-x-amz-cf-pop: NRT20-C3
-x-amz-cf-id: 2ERpXkrW59PDofPYRr5zRYMHStYdleCfVxD5Xqty1e9BQAwgzDpoKw==
+HTTP/2 200 
+content-type: application/json; charset=utf-8
+content-length: 2
+date: Tue, 04 Oct 2022 09:54:57 GMT
+x-amzn-requestid: 591e33c0-1e23-4f25-96a5-408d9a7e219d
+referrer-policy: strict-origin-when-cross-origin
+x-permitted-cross-domain-policies: none
+x-xss-protection: 0
+x-runtime: 0.329173
+x-frame-options: SAMEORIGIN
+x-download-options: noopen
+x-request-id: eb50d4b1-623f-4fa5-a234-e4f26885e1b1
+x-amz-apigw-id: ZeVlxFdmNjMFcDg=
+vary: Accept, Origin
+cache-control: max-age=0, private, must-revalidate
+server-timing: start_processing.action_controller;dur=0.08, sql.active_record;dur=1.41, process_action.action_controller;dur=324.22
+x-content-type-options: nosniff
+etag: W/"4f53cda18c2baa0c0354bb5f9a3ecbe5"
+x-cache: Miss from cloudfront
+via: 1.1 eddf9e6940bd96929e1096ef63815d52.cloudfront.net (CloudFront)
+x-amz-cf-pop: NRT57-P3
+x-amz-cf-id: A9IR669XrsFFgmen2O-uPvF0A_je-Wm1xGrSIq7jox9L8uOtjASTag==
+
+[]
 ```
