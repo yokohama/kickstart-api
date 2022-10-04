@@ -317,7 +317,7 @@ x-amz-cf-id: 2ERpXkrW59PDofPYRr5zRYMHStYdleCfVxD5Xqty1e9BQAwgzDpoKw==
 ### 4. prodにデプロイ
 - kickstart-apiのGitHubをブラウザで開き、[こちら](https://github.com/yokohama/kickstart-cdk#kickstart-ckd-10-8)を参考にして下さい。
 
-### 5. devの疎通確認
+### 5. prodの疎通確認
 - 403エラーが返ってきてるが、サーバーサイドにpetsを実装していないので、　疎通はOKです。
 ```
 curl --include -H GET -H 'Authorization: Bearer ＜コピーしたトークン＞' https://＜API-prod＞/pets
